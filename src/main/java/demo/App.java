@@ -11,7 +11,8 @@ public class App {
 
         //TODO: call your test case functions one after other here
 
-        tests.testCaseAmazonSearh01();
+       // tests.testCaseAmazonSearh01();
+       tests.testCaseHyperlink02();
 
         //END Tests
 
