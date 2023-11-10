@@ -81,12 +81,43 @@ public class TestCases {
         {
             System.out.println(imageURLList.get(i).getAttribute("src"));
         }
-    WebElement titleForSecondIteminPremier = driver.findElement(By.xpath("//h2[text()='Premieres']/parent::div/parent::div/parent::div/following-sibling::div/div/div/a[2]/div/div[3]/div[1]/div"));
-    System.out.println(titleForSecondIteminPremier.getText());
-    WebElement languageOfSecondIteminPremier = driver.findElement(By.xpath("//h2[text()='Premieres']/parent::div/parent::div/parent::div/following-sibling::div/div/div/a[2]/div/div[3]/div[2]/div"));
-    System.out.println(languageOfSecondIteminPremier.getText());
-    System.out.println("end Test case: testCase03");
+       WebElement titleForSecondIteminPremier = driver.findElement(By.xpath("//h2[text()='Premieres']/parent::div/parent::div/parent::div/following-sibling::div/div/div/a[2]/div/div[3]/div[1]/div"));
+      System.out.println(titleForSecondIteminPremier.getText());
+      WebElement languageOfSecondIteminPremier = driver.findElement(By.xpath("//h2[text()='Premieres']/parent::div/parent::div/parent::div/following-sibling::div/div/div/a[2]/div/div[3]/div[2]/div"));
+      System.out.println(languageOfSecondIteminPremier.getText());
+      System.out.println("end Test case: testCase03");
     }
+    
+    public void testCaseNestedFrame() throws InterruptedException
+    {
+         System.out.println("Start Test case: testCase04");
+         driver.get("https://the-internet.herokuapp.com/nested_frames");
+        
+         driver.switchTo().frame("frame-top");
+         Thread.sleep(3000);
+         // Switch to frame "frame-left" Using Locator "Name" "frame-left"
+         driver.switchTo().frame("frame-left");
+         String lefttext = driver.findElement(By.xpath("//body[contains(text(),'LEFT')]")).getText();
+         System.out.println(lefttext);
+         // switch to  parent frame
+         driver.switchTo().parentFrame();
+         // switch to frame "frame-middle" 
+         driver.switchTo().frame("frame-middle");
+          String text2 = driver.findElement(By.xpath("//div[text()='MIDDLE']")).getText();
+         System.out.println(text2);
+         // switch to parent frame
+         driver.switchTo().parentFrame();
+         // switch to frame "frame-right" 
+         driver.switchTo().frame("frame-right");
+         String text3 = driver.findElement(By.xpath("//body[contains(text(),'RIGHT')]")).getText();
+         System.out.println(text3);
+         driver.switchTo().defaultContent();
+         // switch to frame "frame-right" 
+         driver.switchTo().frame("frame-bottom");
+         String text4 = driver.findElement(By.xpath("//body[contains(text(),'BOTTOM')]")).getText();
+         System.out.println(text4);
 
+
+    }
 
 }

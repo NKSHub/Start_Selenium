@@ -13,8 +13,8 @@ public class App {
 
        // tests.testCaseAmazonSearh01();
        //tests.testCaseHyperlink02();
-       tests.testCaseImageUrls();
-
+       //tests.testCaseImageUrls();
+         tests.testCaseNestedFrame();
         //END Tests
 
 
