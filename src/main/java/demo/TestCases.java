@@ -1,15 +1,20 @@
 package demo;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 //Selenium Imports
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -150,5 +155,42 @@ public class TestCases {
         System.out.println(driver.findElement(By.xpath("//li[contains(@class,'ipc-metadata-list-summary-item')][1]//h3[@class='ipc-title__text'] ")).getText());
         System.out.println("end Test case: testCase05");
     }
+
+    public void testCaseWindowHandles() throws Exception
+    {
+         System.out.println("Start Test case: testCase06");
+        driver.get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_open");
+        String parent=driver.getWindowHandle();
+        driver.switchTo().frame("iframeResult");
+        
+        driver.findElement(By.xpath("//button[text()='Try it']")).click();
+        for (String windowHandle : driver.getWindowHandles()) {
+            if(!parent.contentEquals(windowHandle))
+            {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+
+        System.out.println(driver.getCurrentUrl());
+        System.out.println(driver.getTitle());
+        takeSnapShot(driver, "C:\\Users\\Public\\Automation snapshot\\windowhandles.png");
+        driver.close();
+        driver.switchTo().window(parent);
+
+    }
+     public static void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception{
+            //Convert web driver object to TakeScreenshot
+            TakesScreenshot scrShot =((TakesScreenshot)webdriver);
+            //Call getScreenshotAs method to create image file
+            File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+            //Move image file to new destination
+            File DestFile=new File(fileWithPath);
+            //Copy file at destination
+            FileUtils.copyFile(SrcFile, DestFile);
+            }
+    
+
+   
 
 }
