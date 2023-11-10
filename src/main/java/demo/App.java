@@ -14,7 +14,8 @@ public class App {
        // tests.testCaseAmazonSearh01();
        //tests.testCaseHyperlink02();
        //tests.testCaseImageUrls();
-         tests.testCaseNestedFrame();
+         //tests.testCaseNestedFrame();
+         tests.testCaseImdbRatings();
         //END Tests
 
 

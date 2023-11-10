@@ -120,4 +120,35 @@ public class TestCases {
 
     }
 
+    public void testCaseImdbRatings() throws InterruptedException
+    {
+        System.out.println("Start Test case: testCase05");
+        driver.get("https://www.imdb.com/chart/top/");
+        Thread.sleep(3000); 
+         //Select object for the sort dropdown
+         Select sortDropdown = new Select(driver.findElement(By.id("sort-by-selector")));
+
+         sortDropdown.selectByVisibleText("IMDb rating");
+          // Find the highest rated movie Using Locator "XPath" "sort-by-selector" | Select | byVisbileText("IMDb rating")
+        System.out.println(driver.findElement(By.xpath("//li[contains(@class,'ipc-metadata-list-summary-item')][1]//h3[@class='ipc-title__text'] ")).getText());
+        Thread.sleep(5000);
+        // Count the number of movies included in the table. Using Locator "XPath" //div[contains(@class,'cli-children')]//h3[@class='ipc-title__text'] | size()
+        System.out.println(driver.findElements(By.xpath("//div[contains(@class,'cli-children')]//h3[@class='ipc-title__text']")).size());
+        // Select "Release date" from the "Sort by" dropdown Using Locator "ID" "sort-by-selector" | Select | byVisbileText("Release date)
+        sortDropdown.selectByVisibleText("Release date");
+        // Click on the "swap sort order" button Using Locator "ID" "swap-sort-order-button" | click()
+        driver.findElement(By.id("swap-sort-order-button")).click();
+        // Find the oldest movie Using Locator "XPath" //li[contains(@class,'ipc-metadata-list-summary-item')][1]//[@class='ipc-title__text'] | getText()
+        System.out.println(driver.findElement(By.xpath("//li[contains(@class,'ipc-metadata-list-summary-item')][1]//h3[@class='ipc-title__text'] ")).getText());
+        // Click on the "swap sort order" button Using Locator "ID" "swap-sort-order-button" | click()
+        driver.findElement(By.id("swap-sort-order-button")).click();
+        // Find the newest movie Using Locator "XPath" //li[contains(@class,'ipc-metadata-list-summary-item')][1]//[@class='ipc-title__text'] | getText()
+        System.out.println(driver.findElement(By.xpath("//li[contains(@class,'ipc-metadata-list-summary-item')][1]//h3[@class='ipc-title__text'] ")).getText());
+        // Select "Number of ratings" from the "Sort by" dropdown Using Locator "ID" "sort-by-selector" | Select | byVisbileText("Number of ratings")
+        sortDropdown.selectByVisibleText("Number of ratings");
+        // Find the movie which has the most user ratings Using Locator "XPath" //li[contains(@class,'ipc-metadata-list-summary-item')][1]//[@class='ipc-title__text'] | getText()
+        System.out.println(driver.findElement(By.xpath("//li[contains(@class,'ipc-metadata-list-summary-item')][1]//h3[@class='ipc-title__text'] ")).getText());
+        System.out.println("end Test case: testCase05");
+    }
+
 }
