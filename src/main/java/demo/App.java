@@ -12,12 +12,13 @@ public class App {
         //TODO: call your test case functions one after other here
 
        // tests.testCaseAmazonSearh01();
-       tests.testCaseHyperlink02();
+       //tests.testCaseHyperlink02();
+       tests.testCaseImageUrls();
 
         //END Tests
 
 
-        tests.endTest(); // End your test by clearning connections and closing browser
+        //tests.endTest(); // End your test by clearning connections and closing browser
     }
 
     public static void main(String[] args) throws InterruptedException, MalformedURLException {

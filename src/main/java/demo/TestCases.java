@@ -6,13 +6,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 //Selenium Imports
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 ///
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class TestCases {
@@ -55,14 +58,34 @@ public class TestCases {
     //     System.out.println("end Test case: testCase01");
     // }
 
-    public void testCaseHyperlink02()
+    public void testCaseHyperlink02() throws InterruptedException
     {
        System.out.println("Start Test case: testCase02");
-       driver.get("https://in.bookmyshow.com/explore/home/chennai");
+       driver.navigate().to("https://in.bookmyshow.com/explore/home/chennai");
+       Thread.sleep(2000);
       // WebElement hyperlinks = driver.findElement(By.xpath("//body//a"));
        List<WebElement> hyperlinks= driver.findElements(By.xpath("//body//a"));
        System.out.println(hyperlinks.size());
        System.out.println("end Test case: testCase02");
+       
+    }
+
+    public void testCaseImageUrls() throws InterruptedException
+    {
+        System.out.println("Start Test case: testCase03");
+        driver.get("https://in.bookmyshow.com/explore/home/chennai");
+        Thread.sleep(5000);
+        List<WebElement> imageURLList = driver.findElements(By.xpath("//h2[text()='Recommended Movies']/parent::div/parent::div/parent::div/following-sibling::div//img"));
+        int len = imageURLList.size();
+        for(int i=0;i<len;i++)
+        {
+            System.out.println(imageURLList.get(i).getAttribute("src"));
+        }
+    WebElement titleForSecondIteminPremier = driver.findElement(By.xpath("//h2[text()='Premieres']/parent::div/parent::div/parent::div/following-sibling::div/div/div/a[2]/div/div[3]/div[1]/div"));
+    System.out.println(titleForSecondIteminPremier.getText());
+    WebElement languageOfSecondIteminPremier = driver.findElement(By.xpath("//h2[text()='Premieres']/parent::div/parent::div/parent::div/following-sibling::div/div/div/a[2]/div/div[3]/div[2]/div"));
+    System.out.println(languageOfSecondIteminPremier.getText());
+    System.out.println("end Test case: testCase03");
     }
 
 
